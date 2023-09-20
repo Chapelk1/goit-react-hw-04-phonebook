@@ -8,24 +8,23 @@ import {
 
 
 
-export const Item = (props) => {
-    const {name, id, number} = props.contact
-    return (
-      <ItemLi>
-        <Name>{name}</Name>
-        <Number>{number}</Number>
+export const Item = ({ contact: { name, id, number }, onDelete }) => {
+  return (
+    <ItemLi>
+      <Name>{name}</Name>
+      <Number>{number}</Number>
 
-        <Btn
-          type="button"
-          onClick={() => {
-            props.onDelete(id);
-          }}
-        >
-          Delete
-        </Btn>
-      </ItemLi>
-    );
-}
+      <Btn
+        type="button"
+        onClick={() => {
+        onDelete(id);
+        }}
+      >
+        Delete
+      </Btn>
+    </ItemLi>
+  );
+};
 
 Item.propTypes = {
   contact: PropTypes.object,
