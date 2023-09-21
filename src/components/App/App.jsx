@@ -8,30 +8,15 @@ import { Section, Title, SecondTitle,  } from 'components/App/App.styled';
 const LS_CONTACTS = 'CONTACTS'
 
 export function App() {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('')
-  const [localStor, setLocalStor] = useState(true);
-  
-
-  useEffect(() => {
+  const [contacts, setContacts] = useState(() => {
     const localS = JSON.parse(localStorage.getItem(LS_CONTACTS));
-
-    if (localS) {
-      setContacts([...localS]);
-    }
-  },[])
+    return localS ? [...localS] : [];
+  });
+  const [filter, setFilter] = useState('')
   
   useEffect(() => {
-    if (localStor) {
-      setLocalStor(false)
-      return
-    }
     localStorage.setItem(LS_CONTACTS, JSON.stringify(contacts));
   }, [contacts]);
-
-
-  
-  
 
   const filtered = e => {
     setFilter(e.currentTarget.value);
